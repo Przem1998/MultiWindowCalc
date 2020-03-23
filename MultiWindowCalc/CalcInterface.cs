@@ -12,34 +12,56 @@ namespace MultiWindowCalc
 {
     public partial class CalcInterface : Form
     {
-        public CalcInterface(string way)
+    
+        ShowResultCalc showResult = null;
+        public CalcInterface(Form callingform, string mark)
         {
+            showResult = callingform as ShowResultCalc;
             InitializeComponent();
-            if (way == "Add")
-            {
-                Mark.Text = "+";
-                this.Text = "Dodawanie";
+            this.Text = mark;
+            if (mark == "Add") Mark.Text = "+";
+            else if (mark == "Subtract") Mark.Text = "-";
+           
+            else if (mark == "Multiple") Mark.Text = "*";
+             
+            else  Mark.Text = "/";
+             
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double? a = null, b = null,result=0;
+         
+                try
+                {
+                    a = double.Parse(FirstNumber.Text);
+                    b = double.Parse(SecondNumber.Text);
+                }
+                catch (FormatException) { MessageBox.Show("Niewłaściwy format liczby"); }
+     
+                if (Mark.Text == "+") {
+                result = a + b;
+                this.showResult.ResultCalc = a + "+" + b + "=" + result;
             }
-            else if (way == "Subtract")
+            else if (Mark.Text == "-")
             {
-                Mark.Text = "-";
-                this.Text = "Odejmowanie";
+                result = a - b;
+                this.showResult.ResultCalc = a + "-" + b + "=" + result;
             }
-            else if (way == "Multiple")
+            else if (Mark.Text == "*")
             {
-                Mark.Text = "*";
-                this.Text = "Mnożenie";
+                result = a * b;
+                this.showResult.ResultCalc = a + "+" + b + "=" + result;
             }
             else
             {
-                Mark.Text = "/";
-                this.Text = "Dzielenie";
+                result = a/b;
+                this.showResult.ResultCalc = a + "/" + b + "=" + result;
             }
+            this.Close();
+         
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
+

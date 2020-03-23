@@ -15,11 +15,18 @@ namespace MultiWindowCalc
         public ShowResultCalc()
         {
             InitializeComponent();
+        
         }
-
+        public string ResultCalc
+        {
+            get { return label1.Text; }
+            set { label1.Text = value; }
+            
+        }
         private void Add_Click(object sender, EventArgs e)
         {
             DescActivity("Add");
+        
         }
 
         private void Subtract_Click(object sender, EventArgs e)
@@ -38,7 +45,7 @@ namespace MultiWindowCalc
         }
         private void DescActivity(string desc)
         {
-            CalcInterface calc = new CalcInterface(desc);
+            CalcInterface calc = new CalcInterface(this, desc);
             calc.ShowDialog();
         }
     }
